@@ -1,0 +1,41 @@
+{
+  "id": "example-pack",
+  "name": "Example content pack",
+  "version": "0.1.0",
+  "demo": true,
+  "note": "Shows the content pack format. Adds one message in a new category.",
+  "categories": [
+    { "id": "operations", "name": "Installation operations", "summary": "Power, utilities and facility status" }
+  ],
+  "fields": {
+    "outage_area": { "label": "Affected area", "owner": "CES", "type": "text", "help": "Buildings or areas without power, for example: base housing." },
+    "restore_time": { "label": "Estimated restoration", "owner": "CES", "type": "time", "help": "Leave blank if Civil Engineer has no estimate." },
+    "outage_cause": { "label": "Releasable cause", "owner": "CES", "type": "text", "help": "Only if cleared for release." }
+  },
+  "templates": [
+    {
+      "id": "ops-power-outage",
+      "category": "operations",
+      "title": "Power outage",
+      "summary": "Loss of power to part of the installation.",
+      "approval": "436 MSG/CC or designee",
+      "required": ["outage_area", "effective_date", "effective_time", "next_update_time"],
+      "optional": ["outage_cause", "restore_time", "clinic_status", "update_channels"],
+      "products": [
+        {
+          "id": "alert",
+          "label": "Mass notification",
+          "audience": "internal",
+          "limit": 160,
+          "text": "DOVER AFB: Power outage affecting {{outage_area}}.{{#if restore_time}} Estimated restoration {{restore_time}}.{{/if}} Next update by {{next_update_time}}."
+        },
+        {
+          "id": "social",
+          "label": "Social media",
+          "audience": "public",
+          "text": "POWER OUTAGE: {{outage_area|cap}} at Dover Air Force Base lost power at {{effective_time}} {{effective_date|apday}}{{#if outage_cause}} due to {{outage_cause}}{{/if}}.\n\n{{#if restore_time}}Civil Engineer crews estimate power will be restored by {{restore_time}}.{{else}}An estimated restoration time is not yet available.{{/if}}\n\n{{#if clinic_status}}Clinic: {{clinic_status|sentence}}{{/if}}\n\nThe next update will be posted by {{next_update_time}}{{#if update_channels}} on {{update_channels}}{{/if}}."
+        }
+      ]
+    }
+  ]
+}

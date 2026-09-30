@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- This page may not make network requests of any kind. Nothing typed here leaves the computer. -->
+  <meta http-equiv="Content-Security-Policy" content="connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="color-scheme" content="light dark">
+  <title>Rapid Communication Framework</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2313307A'/%3E%3Cpath d='M7 10h18M7 16h18M7 22h11' stroke='%23fff' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+  <a class="skip" href="#view">Skip to content</a>
+
+  <header class="masthead">
+    <div class="brand">
+      <span class="brand-name">Rapid Communication Framework</span>
+      <span class="brand-unit">Dover AFB, 436th Airlift Wing Public Affairs</span>
+    </div>
+    <div class="mast-actions">
+      <button type="button" class="lib-chip" id="library-chip" data-action="library">Library</button>
+      <button type="button" class="btn btn--mast" data-action="new-event">New event</button>
+    </div>
+  </header>
+
+  <nav class="steps" aria-label="Steps"><ol id="steps"></ol></nav>
+
+  <main id="view" tabindex="-1"></main>
+
+  <footer class="foot">
+    <p>Drafting aid. Nothing you enter leaves this computer. Demo content is sample language, not approved for release. Not an official U.S. Air Force product.</p>
+  </footer>
+
+  <dialog id="rfi-dialog" aria-labelledby="rfi-title">
+    <div class="dialog">
+      <h2 id="rfi-title">Request for information</h2>
+      <p class="dialog-lede">Send this to the offices that own the missing facts. Edit it as needed.</p>
+      <div class="inline">
+        <label for="rfi-by">Needed by</label>
+        <input type="text" id="rfi-by" class="time" placeholder="HHMM" inputmode="numeric" maxlength="9" autocomplete="off">
+      </div>
+      <label for="rfi-text" class="visually-hidden">RFI text</label>
+      <textarea id="rfi-text" rows="14"></textarea>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn--primary" data-action="rfi-copy-log">Copy and log as sent</button>
+        <button type="button" class="btn" data-action="rfi-copy">Copy</button>
+        <button type="button" class="btn btn--quiet" data-action="close-dialog">Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="library-dialog" aria-labelledby="library-title">
+    <div class="dialog">
+      <h2 id="library-title">Message library</h2>
+      <ul class="lib-list" id="library-list"></ul>
+      <div id="library-warnings"></div>
+      <p class="dialog-lede">Content packs are JSON files. They load from this computer into this browser and are never uploaded.</p>
+      <label class="na"><input type="checkbox" id="remember-pack" checked> Remember packs I load on this computer</label>
+      <p id="show-demo-row" hidden><label class="na"><input type="checkbox" id="show-demo"> Show demo messages in categories that have office messages</label></p>
+      <input type="file" id="pack-input" accept=".json,application/json" hidden>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn--primary" data-action="load-pack">Load content pack</button>
+        <button type="button" class="btn" data-action="forget-packs">Forget remembered packs</button>
+        <button type="button" class="btn btn--quiet" data-action="close-dialog">Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript><p class="noscript">This tool needs JavaScript. Open it in Microsoft Edge or Google Chrome.</p></noscript>
+
+  <script src="assets/engine.js"></script>
+  <script src="content/demo-library.js"></script>
+  <!-- Real 436 AW content. Git ignores this file; it loads only where it exists. -->
+  <script src="content/local/local-library.js" onerror="this.remove()"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
